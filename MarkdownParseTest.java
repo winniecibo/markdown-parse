@@ -1,10 +1,11 @@
 import static org.junit.Assert.*;
-import org.junit.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.*;
+
+import org.junit.*;
 
 public class MarkdownParseTest {
     @Test
@@ -13,12 +14,10 @@ public class MarkdownParseTest {
     }
 
     @Test
-    public void getLinks() {
-        
-        Path fileName = Path.of("test-file.md");
-	    String contents = Files.readString(fileName);
-        ArrayList<String> links = MarkdownParse.getLinks(contents);
-        
-        assertEquals("Error", 1, links.getLinks());
+    public void getLinksTester() throws IOException {
+        Path filePath = Path.of("/Users/winniechen/Documents/GitHub/markdown-parse/test-file.md");
+        // have direct path because when you use junit, it changes the directory you are in
+        String contents = Files.readString(filePath);
+        assertEquals(MarkdownParse.getLinks(contents), new ArrayList<String>(List.of("https://something.com", "some-page.html")));
     }
 }
