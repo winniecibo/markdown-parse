@@ -21,6 +21,14 @@ public class MarkdownParseTest {
         assertEquals(MarkdownParse.getLinks(contents), new ArrayList<String>(List.of("https://something.com", "some-page.html")));
     }
 
+    @Test
+    public void snippetTester() throws IOException {
+        Path filePath = Path.of("test-snippet1.md");
+        String contents = Files.readString(filePath);
+        assertEquals(MarkdownParse.getLinks(contents), new ArrayList<String>(List.of(
+            "[a link](url.com)", "another link`", "cod[e", "code]"))
+    }
+
 /*     @Test
     public void failTest() throws IOException {
         Path filePath = Path.of("test-file.md");
